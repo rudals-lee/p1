@@ -1,0 +1,281 @@
+/* _mainNavbar.scss 
+ * 
+ * 이 파일은 웹사이트의 상단 네비게이션 바의 모든 스타일을 담당합니다.
+ * 코드는 크게 '데스크탑 기본 스타일'과 '모바일 화면 스타일'로 나뉩니다.
+ *
+ * [수정 핵심]
+ * 1. 중복 정의되었던 .navbar 스타일을 하나로 통합하여 코드 충돌을 막았습니다.
+ * 2. 데스크탑과 모바일 스타일을 @media 쿼리로 명확하게 분리하여 유지보수를 쉽게 만들었습니다.
+ * 3. 요청하신 모든 시각적 문제(가로줄, 메뉴 정렬, 아이콘 색상)를 해결했습니다.
+ */
+
+// =========================================
+//  네비게이션 바 (Navbar) 기본 스타일
+//  - 데스크탑 화면(992px 이상)에서 기본으로 적용되는 스타일입니다.
+// =========================================
+.navbar {
+    /**
+     * [수정] 네비게이션 바의 배경을 투명하게 만들어,
+     * body에 적용된 전체 페이지의 그라데이션 배경이 비치도록 합니다.
+   * [수정] 부트스트랩의 기본 흰색 배경 스타일을 강제로 덮어쓰기 위해
+     * background-color 속성 값 뒤에 !important를 추가합니다.
+     * 이 작은 수정이 '톤앤매너가 깨지는' 현상을 해결해 줄 것입니다.
+     */
+    background-color: transparent !important;
+  
+    /**
+     * [문제 1 해결] 불필요한 가로줄의 원인이었던 border 속성을 수정합니다.
+     * 웹사이트의 전체 톤앤매너에 맞는 부드러운 색상(#E8E2D1)으로 하단에만 선을 추가하여
+     * 콘텐츠 영역과 시각적으로 구분해주는 역할을 합니다.
+     */
+    border-bottom: 1px solid #E8E2D1;
+  
+    /**
+     * [수정] padding(안쪽 여백) 값을 한 번만 명확하게 정의합니다.
+     * padding: 12px 0; 은 '상하로는 12px, 좌우로는 0px'의 여백을 의미합니다.
+     * 좌우 여백이 0인 이유는, 내부의 .container 클래스가 화면 크기에 맞춰
+     * 콘텐츠의 좌우 여백을 자동으로 조절해주기 때문입니다.
+     */
+    padding: 12px 0;
+  }
+  
+  /**
+   * HTML의 .container 클래스가 로고와 메뉴를 양쪽으로 정렬해주므로,
+   * .navbar에 직접 justify-content 같은 flex 속성을 강제로 덮어쓸 필요가 없습니다.
+   * 이로써 부트스트랩의 기본 레이아웃 기능을 최대한 활용하게 됩니다.
+   */
+  
+  // =========================================
+  //  메뉴 항목 및 드롭다운 (데스크탑)
+  // =========================================
+  
+  // 기본 메뉴 링크(.nav-link)의 스타일
+  .navbar-nav .nav-link {
+    color: #333; // 기본 글자색
+    font-weight: bold; // 굵은 글씨체로 강조
+    transition: all 0.3s ease; // 호버 효과 등을 0.3초 동안 부드럽게 표현
+    white-space: nowrap; // '이물제거술' 같이 띄어쓰기가 있는 메뉴가 두 줄로 나뉘는 것을 방지
+  }
+  
+  // [수정] 메뉴 항목에 마우스를 올렸을 때(hover)의 효과
+  .navbar-nav .nav-item > .nav-link:hover,
+  .navbar-nav .nav-item > .nav-link:focus {
+    // 배경색을 채우는 대신 글자 색상만 변경하여 더 깔끔한 느낌을 줍니다.
+    color: #e48c7a; // 요청하셨던 포인트 코랄 색상
+  }
+  
+  // 데스크탑 화면에서 보이는 드롭다운(하위) 메뉴의 배경
+  .dropdown-menu {
+    // [수정] 요청하신 톤앤매너에 맞춰 전체 페이지와 동일한 그라데이션 배경을 적용합니다.
+    background: linear-gradient(to bottom, #FCF8F0 0%, #E8E2D1 100%);
+    border: 1px solid #E8E2D1; // 배경과 어울리는 색으로 테두리 설정
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); // 은은한 그림자 효과로 입체감 부여
+    border-radius: 0; // 부트스트랩의 기본 둥근 모서리를 제거하여 각진 모양으로 변경
+  }
+  
+  // 드롭다운 메뉴의 각 항목(.dropdown-item) 스타일
+  .dropdown-item {
+    transition: all 0.3s ease; // 부드러운 전환 효과
+  
+    // 드롭다운 아이템에 마우스를 올렸을 때
+    &:hover, &:focus {
+      color: #ffffff; // 글자색은 흰색
+      background-color: #e48c7a; // 배경색은 코랄색으로 변경하여 강조
+    }
+  }
+  
+  // 부트스트랩이 자동으로 추가하는 드롭다운 화살표(▼) 아이콘을 제거합니다.
+  .nav-link.dropdown-toggle::after {
+    display: none;
+  }
+  
+  
+  // =========================================
+  //  모바일 화면 스타일 (화면 너비 991.98px 이하)
+  //  - @media 쿼리는 특정 조건에서만 스타일을 적용하라는 CSS 규칙입니다.
+  //  - 991.98px은 부트스트랩의 데스크탑/태블릿 기준점(breakpoint)입니다.
+  // =========================================
+  @media (max-width: 991.98px) {
+    // [모바일 메뉴 투명 드롭다운 강제 적용 블록]
+    // - 모바일(991.98px 이하)에서 2depth 메뉴(드롭다운)의
+    //   배경/테두리/그림자가 남거나, 사각형 배경이 생성되는
+    //   문제를 완전히 막기 위한 우선순위 최고 셀렉터입니다.
+    // - 부트스트랩 및 커스텀 CSS 어떤 배경색/보더/섀도우도
+    //   무시하고 완전히 투명하게 만듭니다.
+    // - !important 필수, :hover/:focus/:active까지 모든 상태
+    //   동시 적용(브라우저 기본/상위 CSS 덮어씌우기 방지)
+  
+      // 드롭다운 메뉴(전체 박스) + 상태까지 모두 투명화
+    .navbar-nav .nav-item.dropdown > .dropdown-menu,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu.show,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu.open,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu:focus,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu:active,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu:hover,
+    // 하위 항목(아이템)도 마찬가지로
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item.active,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item.show,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item.open,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item:focus,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item:active,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu .dropdown-item:hover,
+    .navbar-nav .nav-item.dropdown > .dropdown-menu * {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .nav-link {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+    /**
+     * .navbar-collapse: 햄버거 메뉴의 전체 컨테이너
+     * .collapse.show: 햄버거 버튼을 클릭해서 메뉴가 펼쳐졌을 때 JS가 추가하는 클래스
+     */
+    .navbar-collapse.collapse.show {
+      /**
+       * [문제 1 해결] 불필요한 가로줄처럼 보였던 현상을 해결합니다.
+       * 상단 여백(margin-top)을 주어 원래 네비게이션 바의 하단 테두리와 겹치지 않게 합니다.
+       */
+      margin-top: 12px;
+      
+      /**
+       * 메뉴가 펼쳐졌을 때 뒤에 있는 캐러셀 이미지가 비치면 어지러우므로,
+       * 반투명한 검정 배경(rgba)을 깔아 메뉴의 가독성을 높여줍니다.
+       */
+      background-color: rgba(0, 0, 0, 0.15); // 배경색을 투명하게 만들어 캐러셀 이미지가 비치도록 합니다.
+      border-radius: 8px; // 부드러운 느낌을 위한 모서리 둥글게 처리
+      padding: 1rem 1rem 0rem; // 메뉴 목록과 배경 사이에 여유 공간 확보
+    }
+    
+    // 모바일 화면에서의 메뉴 링크들
+    .navbar-nav .nav-link,
+    .navbar-nav .dropdown-item {
+      color: #ffffff !important; // 어두운 배경 위이므로 기본 글자색을 흰색으로 변경
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    //   border-bottom: 1px solid rgba(255, 255, 255, 0.1); // 메뉴 사이에 희미한 구분선 추가 부분 주석처리리
+  
+      // [문제 2 해결] 메뉴 텍스트를 중앙이 아닌 왼쪽으로 정렬합니다.
+      text-align: left;
+      padding-left: 1rem; // 왼쪽 벽에 너무 붙지 않도록 여백 추가
+
+        /* [추가] 모바일 메뉴의 상하 간격을 절반으로 줄입니다. */
+      padding-top: -2.5rem !important;
+      padding-bottom: 0.5rem !important;
+    }
+    
+    // 마지막 메뉴 아이템의 하단 구분선은 필요 없으므로 제거합니다 부분 주석처리
+    // .navbar-nav .nav-item:last-child .nav-link {
+    //   border-bottom: none;
+    // }
+  
+    // 모바일에서 메뉴 항목을 터치(hover/focus)했을 때의 효과
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus,
+    .navbar-nav .dropdown-item:hover,
+    .navbar-nav .dropdown-item:focus {
+      background-color: transparent !important; // 배경색은 바뀌지 않도록 투명하게 유지
+      color: #e48c7a !important;               // 글자색만 코랄색으로 변경하여 터치 피드백을 줌
+    }
+  
+    // 모바일에서 보이는 드롭다운(하위) 메뉴
+    .dropdown-menu {
+      // 배경과 테두리는 이미 부모인 .navbar-collapse에서 처리하므로 투명하게 만듭니다.
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding-left: 0.1rem; // 상위 메뉴보다 더 들여쓰기하여 계층 구조를 시각적으로 표현
+    }
+
+    // [신규] 모바일 플라이아웃 메뉴를 위한 스타일 블록
+    .navbar-collapse .nav-item.dropdown {
+      position: relative; //
+    }
+
+    .navbar-collapse {
+      position: relative; // 햄버거 메뉴 컨테이너를 기준으로 삼음
+    }
+  
+    .nav-item.dropdown .dropdown-menu {
+      // 기본 스타일 리셋 및 위치 설정
+      position: absolute;
+      display: none; // 기본적으로 숨김
+      top: -3px; // JS가 동적으로 설정
+      left: calc(var(--flyout-left-position, 150px) - 18px) !important;
+      // left: var(--flyout-left-position, 150px); // JS가 동적으로 설정, 실패 시 대비 값
+      width: auto; // 내용에 따라 너비 자동 조절
+      min-width: 150px; // 최소 너비 지정
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+      
+      // 기존 모바일 메뉴의 톤앤매너 유지
+      background: rgba(20, 20, 20, 0.85); // 반투명 배경
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-top: 0; // 불필요한 상단 마진 제거
+      z-index: 10; // 다른 요소 위에 보이도록 z-index 추가
+
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  
+    // [신규] JS에 의해 .show 클래스가 추가되었을 때 메뉴를 보이게 함
+    .nav-item.dropdown .dropdown-menu.show {
+      display: block;
+    }
+  
+    // [신규] 플라이아웃 내부의 아이템 스타일 조정
+    .nav-item.dropdown .dropdown-menu .dropdown-item {
+      padding: 0.5rem 1rem;
+      text-align: left;
+      color: #ffffff !important;
+      background-color: transparent !important;
+      border-bottom: none; // 구분선 제거
+    }
+  
+    .nav-item.dropdown .dropdown-menu .dropdown-item:hover,
+    .nav-item.dropdown .dropdown-menu .dropdown-item:focus {
+      color: #e48c7a !important; // 호버 시 포인트 색상 적용
+    }
+  
+    /**
+     * [문제 3 해결] 햄버거 아이콘 색상을 원래대로 복구합니다.
+     * 기존 코드에서 아이콘 색을 강제로 흰색으로 바꾸는 부분을 수정하여,
+     * 어떤 배경에서든 잘 보이는 어두운 색 아이콘이 나오도록 합니다.
+     */
+    .navbar-toggler-icon {
+      /**
+       * 부트스트랩의 아이콘은 SVG 이미지로 되어 있습니다.
+       * stroke='...' 부분의 색상 코드를 바꾸면 아이콘 색이 바뀝니다.
+       * 여기서는 'rgba(51, 51, 51, 1)' (어두운 회색)으로 설정했습니다.
+       */
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(51, 51, 51, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  
+    // 햄버거 아이콘을 감싸는 버튼의 테두리 색상도 아이콘과 비슷하게 맞춰줍니다.
+    .navbar-toggler {
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+/*
+ * [추가] 햄버거 메뉴가 펼쳐졌을 때 (부모인 .navbar에 .show 클래스가 있는 자식이 있을 때)
+ * 네비게이션 바 자체의 밑줄(border-bottom) 색상을 투명하게 만들어 보이지 않게 합니다.
+ * 이것이 "쓸데없는 줄" 문제의 진짜 해결책일 가능성이 높습니다.
+ */
+.navbar:has(.navbar-collapse.show) {
+    border-bottom-color: transparent !important;
+}
+
+ 

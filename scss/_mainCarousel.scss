@@ -1,0 +1,87 @@
+/* =========================================
+   메인 캐러셀 반응형 아트 디렉션 (최종 통합본)
+   ========================================= */
+   
+   #mainCarousel .carousel-item {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right center; /* 데스크톱 기본 위치 */
+}
+
+/* =========================================
+   특정 캐러셀 아이템 위치 미세 조정
+   ========================================= */
+/**
+ * JS에서 추가한 '.slide-2-special-position' 클래스를 가진 요소에만
+ * 별도의 background-position 값을 적용하여 위치를 조정합니다.
+ */
+#mainCarousel .slide-2-special-position {
+    background-position: right calc(50% - 20vh);
+}
+
+#mainCarousel .slide-2-special-position.active .carousel-promo-text {
+    color: pink;
+}
+
+
+// 기존 모바일 미디어 쿼리
+@media (max-width: 768px) {
+    #mainCarousel .carousel-item {
+        background-position: 80% 20%; /* 모바일 기본 위치 */
+    }
+
+    #mainCarousel .slide-2-special-position {
+        background-position: 80% calc(20% - 10vh);
+    }
+
+    /* =========================================
+       [신규 추가] 모바일 캐러셀 아이템 위치 미세 조정
+       ========================================= */
+     
+       /* =========================================     
+      [신규 추가] main-slider-7 모바일 이미지 교체
+       ========================================= */
+    #mainCarousel .slide-7-position.mobile-replace-image-7 {
+        background-image: url('../images/main-slider7b.png') !important;
+        background-position: center center; // 수정된 부분
+        background-size: cover; 
+    
+       // main-slider7.png (인덱스 7)    
+    #mainCarousel .carousel-item:nth-child(8) { // CSS nth-child는 1부터 시작하므로 7번째 이미지는 8번째 자식
+        background-position: calc(80% - 70px) 20%; /* 기존 모바일 위치에서 왼쪽으로 70px 이동 */
+    }
+      // main-slider2.png (인덱스 2) 
+    #mainCarousel .carousel-item:nth-child(3) { // CSS nth-child는 1부터 시작하므로 3번째 이미지는 3번째 자식
+        background-position: calc(80% - 30px) -20% !important; // 왼쪽으로 30px 이동 / 위로 20% 이동
+    }
+     // main-slider3.png (인덱스 3)
+    #mainCarousel .carousel-item:nth-child(4) { // CSS nth-child는 1부터 시작하므로 3번째 이미지는 4번째 자식
+        background-position: calc(80% - 30px) 20%; /* 기존 모바일 위치에서 왼쪽으로 30px 이동 */
+    }
+  
+    }
+}
+.carousel-promo-text {
+    position: absolute;
+    bottom: calc(var(--consult-bar-height, 56px) + 13vh) !important; // 하단바 높이에 따라 동적 조정 가능 
+    left: 0;
+    width: 100%;
+    p{ font-size: 7.2vw !important;};
+    text-align: center;
+    color: #fff;
+    z-index: 20;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+}
+
+
+@media (min-width:991.99px) {
+    .carousel-promo-text {
+        top:50vh;
+        transform: translateX(-10%); 
+        width:40%;
+        p { font-size: 3.9rem !important; // 더 큼직하게
+            line-height: 1.2;
+        };
+        // text-align: left;
+    }
+}

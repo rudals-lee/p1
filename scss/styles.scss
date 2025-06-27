@@ -1,0 +1,630 @@
+@use 'reset' as *;
+@use 'mainNavbar' as *;
+@use 'mainCarousel' as *; 
+// mainCarousel 스타일이 이 파일 내에 직접 정의되어 있으므로 주석 처리하거나 제거합니다.
+
+
+/* =========================================
+   전역 스타일 및 변수 (Global Styles & Variables)
+   ========================================= */
+/**
+ * 웹사이트 전체에서 사용될 색상, 폰트, 기본 레이아웃 등을 정의합니다.
+ * CSS 변수(--variable)를 사용하면 나중에 색상이나 스타일을 한 번에 쉽게 변경할 수 있어 유지보수가 매우 편리해집니다.
+ * 톤앤매너는 멘티님께서 설정하신 값을 존중하여 반영합니다.
+ */
+:root {
+    /* 색상 변수 정의 */
+    --color-primary: #FF6B6B; /* 멘티님의 톤앤매너 포인트 색상 */
+    --color-text: #5B4F3C; /* 기본 텍스트 색상 */
+    --color-background-start: #FCF8F0; /* 배경 그라데이션 시작 색 */
+    --color-background-end: #E8E2D1; /* 배경 그라데이션 끝 색 */
+    --color-form-bg: #F9F5E9; /* 폼 배경 색 */
+
+    /* [신규] JavaScript가 실시간으로 채워줄 동적 높이 변수 */
+    --navbar-height: 70px; /* 네비게이션 바 높이 (JS 로드 전 기본값) */
+    --consult-bar-height: 80px; /* 하단 상담 바 높이 (JS 로드 전 기본값) */
+}
+
+body {
+    background: linear-gradient(to bottom, var(--color-background-start) 0%, var(--color-background-end) 100%);
+    font-family: 'WandocleanseaB', sans-serif;
+
+    /**
+     * [수정] JavaScript가 계산한 네비바 높이만큼 body의 상단 안쪽 여백을 확보합니다.
+     * 하단 padding은 이제 JS의 `setDynamicHeights` 함수에서 직접 관리합니다.
+     * 이 코드가 없다면, position:fixed 된 요소들 때문에 페이지의 최상단 콘텐츠가 가려지게 됩니다.
+     */
+    padding-top: var(--navbar-height);
+    // padding-bottom은 JS에서 직접 관리하므로 여기서 제거
+}
+
+
+/* =========================================
+   메인 캐러셀 반응형 아트 디렉션 (최종 통합본)
+   ========================================= */
+/**
+ * 이 CSS 블록은 우리가 최종적으로 선택한 '배경 이미지' 기법을 위한 스타일입니다.
+ * JavaScript가 동적으로 생성한 div.carousel-item에 배경 이미지를 설정하고,
+ * 그 이미지가 모든 화면 크기에서 최적으로 보이도록 제어하는 모든 규칙이 담겨있습니다.
+ *
+ * [핵심 수정] 캐러셀 높이는 이제 JS에서 동적으로 계산하여 `#mainCarousel`에 직접 적용합니다.
+ * 따라서 `.carousel-item`은 부모의 100% 높이를 따르도록 변경합니다.
+ */
+#mainCarousel {
+    position: relative; // 내부 아이템의 절대 위치 기준점 제공
+    width: 100%;
+    overflow: hidden; // 내용이 넘치면 잘라내기
+    /* height와 max-height는 이제 JS에서 adjustCarouselHeight 함수에서 동적으로 설정하므로 여기서는 제거합니다. */
+}
+
+#mainCarousel .carousel-item {
+    height: 100%;
+    max-height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/* =========================================
+   특정 캐러셀 아이템 위치 미세 조정 (데스크톱)
+   ========================================= */
+/**
+ * JS에서 추가한 '.slide-X-position' 클래스를 가진 요소에만
+ * 별도의 background-position 값을 적용하여 위치를 조정합니다.
+ */
+#mainCarousel .slide-2-position { // 기존 'slide-2-special-position'에서 클래스명 변경 (JS와 통일)
+    /**
+     * 데스크톱 기본 위치 조정
+     * 가로 위치(right)는 유지하고, 세로 위치만 기본값(center, 50%)에서
+     * calc() 함수를 이용해 1vh만큼 위로 올립니다.
+     */
+    background-position: right calc(50% - 10vh);
+}
+
+/* [기존 주석 유지] @media (max-width: 768px)는 "브라우저 화면 너비가 768px 이하일 경우에만 적용하라"는 규칙입니다. */
+@media (max-width: 768px) {
+    #mainCarousel .carousel-item {
+        /* [수정] 모바일 기본 위치를 왼쪽으로 70px 이동 */
+        background-position: calc(80% - 130px) 20%;
+    }
+
+    // 기존 slide-2-position 규칙 유지
+    #mainCarousel .slide-2-position {
+        background-position: 80% calc(20% - 3vh);
+    }
+
+    /* =========================================
+       [신규 추가] main-slider-7 모바일 이미지 교체
+       ========================================= */
+    #mainCarousel .slide-7-position.mobile-replace-image-7 {
+        background-image: url('../images/main-slider7b.png') !important;
+    }
+
+    // [제거] main-slider-3.png (slide-3-position)에 대한 모바일 특정 스타일은 더 이상 필요 없습니다.
+    // 기본 .carousel-item 스타일(background-position: calc(80% - 70px) 20%)을 따릅니다.
+}
+
+@media (max-width: 991px) {
+    #mainCarousel .slide-3-position {
+        background-size: auto 80vh; // 추천: auto 80vh, 필요시 70vh 등 실시간 조정
+        background-position: center 35%; // 추천: center 35%, 필요시 40% 등 실시간 조정
+    }
+}
+
+/* =========================================
+   하단 빠른 상담 바 (Quick Consultation Bar)
+   ========================================= */
+/**
+ * [핵심 수정] HTML의 클래스명 변경에 따라 CSS 선택자를 .quick-consult-bar로 수정합니다.
+ * position: fixed 속성을 사용하여 스크롤과 관계 없이 항상 화면 하단에 고정시킵니다.
+ */
+.quick-consult-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    background: var(--color-form-bg);
+    padding: 0.5rem 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.consult-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.form-row {
+    display: flex;
+    gap: 0.5rem;
+}
+.second-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.privacy-agreement {
+    flex: 1 1 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center; // 중앙 정렬
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
+
+.privacy-text {
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+.quick-consult-bar .form-control,
+.quick-consult-bar .form-select,
+.quick-consult-bar .btn-primary {
+    margin: 0;
+    padding: 0.3rem 0.5rem;
+    height: 2rem;
+    font-size: 0.9rem;
+    border: 1px solid #DDD;
+}
+
+.quick-consult-bar .form-control,
+.quick-consult-bar .form-select {
+    background-color: white;
+}
+
+.quick-consult-bar .btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+}
+
+.quick-consult-bar .btn-primary:hover {
+    filter: brightness(0.9);
+}
+
+.quick-consult-bar .form-check-input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    transform: scale(0.9);
+}
+
+
+/* 모바일 (최대 991.98px) */
+@media (max-width: 991.98px) {
+    .consult-form {
+        gap: 0.2rem;
+    }
+    
+    .form-row {
+        gap: 0.3rem;
+    }
+    
+    .privacy-agreement {
+        gap: 0.2rem;
+        font-size: 0.75rem;
+    }
+    
+    .privacy-text {
+        font-size: 0.75rem;
+    }
+    .second-row {
+      .privacy-agreement { flex: 0 0 35%; }
+      .form-item { flex: 0 0 65%; }
+    }
+    .quick-consult-bar .form-control,
+    .quick-consult-bar .form-select,
+    .quick-consult-bar .btn-primary {
+        font-size: 0.85rem;
+        height: 1.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+    
+    .quick-consult-bar .form-check-input {
+        transform: scale(0.8);
+    }
+}
+
+/* 데스크탑 (992px 이상) */
+@media (min-width: 992px) {
+    .consult-form {
+        flex-direction: row;
+        gap: 0.8rem;
+    }
+    
+    .form-row {
+        flex: 1;
+        gap: 0.8rem;
+    }
+    
+    .privacy-agreement {
+        gap: 0.4rem;
+        font-size: 0.85rem;
+    }
+    
+    .privacy-text {
+        font-size: 0.85rem;
+    }
+    
+    .quick-consult-bar .form-control,
+    .quick-consult-bar .form-select,
+    .quick-consult-bar .btn-primary {
+        font-size: 0.9rem;
+        height: 2.2rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .quick-consult-bar .form-check-input {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   로그인 모달 (Login Modal)
+   ========================================= */
+.modal-content {
+    background: var(--color-form-bg);
+}
+
+.modal-body .form-control {
+    background-color: white;
+    border: 1px solid #DDD;
+    margin-bottom: 1rem;
+}
+// scss/styles.scss 파일의 일부
+.carousel-promo-text {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  bottom: calc(var(--consult-bar-height) + 20px); /* 하단 바와의 간격 살짝 추가 */
+  z-index: 1040;
+  text-align: center;
+  pointer-events: none;
+  color: #FFFFFF; /* 글자 색상을 흰색으로 변경 */
+  font-family: "WandocleanseaB", sans-serif;
+  background: none;
+  transition: bottom 0.3s;
+  right: 0;
+  padding: 0;
+}
+
+.carousel-promo-text p {
+  margin: 0;
+  font-size: 2.8rem; /* 글자 크기를 키움 */
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* 어두운 그림자로 변경하여 가독성 확보 */
+}
+
+@media (max-width: 991px) {
+  .carousel-promo-text p {
+    font-size: 2rem; /* 모바일 크기 비례하여 키움 */
+  }
+}
+@media (max-width: 768px) {
+  .carousel-promo-text p {
+    font-size: 1.6rem; /* 모바일 크기 비례하여 키움 */
+  }
+}
+
+@charset "UTF-8";
+/* =========================================
+   CSS 초기화 (Modern CSS Reset)
+   ========================================= */
+/**
+ * 브라우저마다 다른 기본 스타일을 통일시켜,
+ * 어떤 환경에서든 예측 가능하고 일관된 스타일링을 보장합니다.
+ * 메인 SCSS 파일에서 가장 먼저 import 되어야 합니다.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================================
+   네비게이션 바 스타일
+   ========================================= */
+.navbar {
+  background-color: #f8f9fa;
+  padding: 0 20px;
+  border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  justify-content: center;
+  /**
+   * =========================================
+   * [신규 추가] 네비게이션 바 상하 여백 3:2 비율 설정
+   * =========================================
+   */
+  /**
+   * 1. 비율 계산을 위한 '기본 단위'를 변수로 정의합니다.
+   * 이 값(예: 10px)을 기준으로 3:2 비율을 계산합니다.
+   * 나중에 이 값만 바꾸면 전체 여백이 비율을 유지한 채 조절됩니다.
+   */
+  --nav-margin-unit: 3px;
+  /**
+   * 2. calc() 함수를 사용하여 실제 margin 값을 계산합니다.
+   * CSS 변수를 이용해 기본 단위에 원하는 비율 값을 곱합니다.
+   */
+  padding-top: calc(var(--nav-margin-unit) * 4);
+  padding-bottom: calc(var(--nav-margin-unit) * 1.5);
+}
+
+/* =========================================
+   내비게이션 바 (Navigation Bar)
+   ========================================= */
+/**
+ * 부트스트랩의 기본 내비게이션 바 스타일을 덮어써서
+ * 우리 웹사이트의 톤앤매너에 맞게 커스터마이징합니다.
+ */
+/* =========================================
+   네비게이션 바 스타일 (반응형 단위로 수정)
+   ========================================= */
+.navbar {
+  background-color: #f8f9fa;
+  /* 20px -> 1.25rem */
+  padding: 0 1.25rem;
+  border-bottom: 1px solid #e7e7e7; /* 1px 테두리는 유지하는 것이 일반적입니다 */
+  display: flex;
+  justify-content: center;
+  /**
+   * =========================================
+   * [수정] 네비게이션 바 상하 여백 단위를 rem으로 변경
+   * =========================================
+   */
+  /**
+   * 비율 계산을 위한 '기본 단위'를 rem으로 설정합니다.
+   * 10px -> 0.625rem
+   */
+  --nav-margin-unit: 0.625rem;
+  padding-top: calc(var(--nav-margin-unit) * 2);
+  padding-bottom: calc(var(--nav-margin-unit) * 0.8);
+}
+
+/* =========================================
+   메뉴 항목 스타일 (상위 메뉴)
+   ========================================= */
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: block;
+  /* 15px -> 0.9375rem, 20px -> 1.25rem */
+  padding: 0.7375rem 1.25rem;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  /* [추가] 공백(space)을 기준으로 자동 줄바꿈 되는 것을 방지합니다. */
+}
+
+.nav-item:hover .nav-link {
+  background-color: #e7e7e7;
+}
+
+/* =========================================
+   드롭다운 메뉴 스타일
+   ========================================= */
+.dropdown-menu {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* 180px -> 11.25rem */
+  min-width: 11.25rem;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item a {
+  display: block;
+  /* 12px -> 0.75rem, 20px -> 1.25rem */
+  padding: 0.75rem 1.25rem;
+  color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover a {
+  background-color: #e7e7e7;
+}
+
+/* =========================================
+   네비게이션 드롭다운 화살표 제거
+   ========================================= */
+/**
+ * 부트스트랩은 .dropdown-toggle 클래스가 있는 링크에
+ * ::after 가상 요소를 이용해 화살표(▼)를 자동으로 추가합니다.
+ * 이 가상 요소의 display 속성을 'none'으로 설정하여 보이지 않게 만듭니다.
+ */
+.nav-link.dropdown-toggle::after {
+  display: none;
+}
+
+
+
+
+/* =========================================
+   전역 스타일 및 변수 (Global Styles & Variables)
+   ========================================= */
+/**
+ * 웹사이트 전체에서 사용될 색상, 폰트, 기본 레이아웃 등을 정의합니다.
+ * CSS 변수(--variable)를 사용하면 나중에 색상이나 스타일을 한 번에 쉽게 변경할 수 있어 유지보수가 매우 편리해집니다.
+ * 톤앤매너는 멘티님께서 설정하신 값을 존중하여 반영합니다.
+ */
+:root {
+  /* 색상 변수 정의 */
+  --color-primary: #FF6B6B; /* 멘티님의 톤앤매너 포인트 색상 */
+  --color-text: #5B4F3C; /* 기본 텍스트 색상 */
+  --color-background-start: #FCF8F0; /* 배경 그라데이션 시작 색 */
+  --color-background-end: #E8E2D1; /* 배경 그라데이션 끝 색 */
+  --color-form-bg: #F9F5E9; /* 폼 배경 색 */
+  /* [신규] JavaScript가 실시간으로 채워줄 동적 높이 변수 */
+  --navbar-height: 70px; /* 네비게이션 바 높이 (JS 로드 전 기본값) */
+  --consult-bar-height: 80px; /* 하단 상담 바 높이 (JS 로드 전 기본값) */
+}
+
+body {
+  background: linear-gradient(to bottom, var(--color-background-start) 0%, var(--color-background-end) 100%);
+  font-family: "WandocleanseaB", sans-serif;
+  /**
+   * [핵심 수정] JavaScript가 계산한 네비바와 상담바의 높이만큼 body의 상/하단 안쪽 여백을 확보합니다.
+   * 이 코드가 없다면, position:fixed 된 요소들 때문에 페이지의 최상단과 최하단 콘텐츠가 가려지게 됩니다.
+   */
+  padding-top: var(--navbar-height);
+  padding-bottom: var(--consult-bar-height);
+}
+
+/* =========================================
+   메인 캐러셀 반응형 아트 디렉션 (최종 통합본)
+   ========================================= */
+/**
+ * 이 CSS 블록은 우리가 최종적으로 선택한 '배경 이미지' 기법을 위한 스타일입니다.
+ * JavaScript가 동적으로 생성한 div.carousel-item에 배경 이미지를 설정하고,
+ * 그 이미지가 모든 화면 크기에서 최적으로 보이도록 제어하는 모든 규칙이 담겨있습니다.
+ */
+#mainCarousel .carousel-item {
+  /* 이제 body에 padding이 생겨서 공간을 확보해주므로,
+  * 캐러셀은 더 이상 복잡한 계산 없이 화면 전체 높이를 차지하면 됩니다.
+  * 아주 간단하게 100vh로 변경합니다.
+  */
+  height: 100vh;
+  /* max-height는 더 이상 필요 없으므로 삭제하거나 height와 동일하게 설정합니다. */
+  max-height: 100vh;
+  /* [기존 주석 유지] 배경 이미지가 찌그러지지 않으면서, div 영역을 빈틈없이 가득 채우도록 크기를 조절합니다. */
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* [기존 주석 유지] 넓은 화면에서 배경 이미지를 어떻게 위치시킬지 결정합니다. */
+  background-position: right center; /* 데스크톱 기본 위치 */
+}
+
+/* =========================================
+   특정 캐러셀 아이템 위치 미세 조정
+   ========================================= */
+/**
+ * JS에서 추가한 '.slide-2-special-position' 클래스를 가진 요소에만
+ * 별도의 background-position 값을 적용하여 위치를 조정합니다.
+ */
+#mainCarousel .slide-2-special-position {
+  /**
+   * 데스크톱 기본 위치 조정
+   * 가로 위치(right)는 유지하고, 세로 위치만 기본값(center, 50%)에서
+   * calc() 함수를 이용해 1vh만큼 위로 올립니다.
+   */
+  background-position: right calc(50% - 10vh);
+}
+
+/**
+ * 모바일 화면에서도 동일하게 위치를 조정합니다.
+ */
+@media (max-width: 768px) {
+  #mainCarousel .slide-2-special-position {
+    /**
+     * 모바일 기본 위치(80% 20%)를 기준으로,
+     * 세로 위치(20%)만 calc()를 이용해 1vh만큼 위로 올립니다.
+     */
+    background-position: 80% calc(20% - 3vh);
+  }
+}
+/* [기존 주석 유지] @media (max-width: 768px)는 "브라우저 화면 너비가 768px 이하일 경우에만 적용하라"는 규칙입니다. */
+@media (max-width: 768px) {
+  #mainCarousel .carousel-item {
+    /* [기존 주석 유지] 모바일 화면에서 모델의 얼굴이 중앙에 아름답게 위치하게 됩니다. */
+    background-position: 80% 20%;
+  }
+}
+/* =========================================
+   하단 빠른 상담 바 (Quick Consultation Bar)
+   ========================================= */
+/**
+ * [핵심 수정] HTML의 클래스명 변경에 따라 CSS 선택자를 .quick-consult-bar로 수정합니다.
+ * position: fixed 속성을 사용하여 스크롤과 관계 없이 항상 화면 하단에 고정시킵니다.
+ */
+.quick-consult-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+  background: var(--color-form-bg);
+  padding: 1rem 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* [수정] 클래스 이름을 .quick-consult-bar 로 변경 */
+.quick-consult-bar .form-control,
+.quick-consult-bar .form-select {
+  background-color: white;
+  border: 1px solid #DDD;
+}
+
+/* [수정] 클래스 이름을 .quick-consult-bar 로 변경. 버튼 색상은 톤앤매너에 맞게 변수 사용 */
+.quick-consult-bar .btn-primary {
+  background-color: var(--color-primary);
+  border: none;
+}
+
+.quick-consult-bar .btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+/* =========================================
+   로그인 모달 (Login Modal)
+   ========================================= */
+.modal-content {
+  background: var(--color-form-bg);
+}
+
+.modal-body .form-control {
+  background-color: white;
+  border: 1px solid #DDD;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=styles.css.map */
