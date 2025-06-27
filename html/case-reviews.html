@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>케이스 성형외과</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+<style>
+    @font-face {
+      font-family: 'WandocleanseaB';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaB.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'WandocleanseaB', 'Noto Sans KR', sans-serif;
+      background: #fdfdfb;
+      color: #333;
+      text-align: center;
+    }
+
+    nav a.active {
+      border-bottom: 2px solid #c38b6b;
+      color: #c38b6b;
+    }
+
+    .main {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section {
+      margin-bottom: 50px;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .cta-buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: #c38b6b;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .review-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      margin: 0 auto 30px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .review-author {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .review-date {
+      color: gray;
+      font-size: 0.9rem;
+    }
+
+    .review-content {
+      margin-top: 15px;
+    }
+
+    .filter-buttons button {
+      padding: 8px 20px;
+      margin: 5px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+    }
+
+    .filter-buttons button.active {
+      background: hotpink;
+      color: white;
+      border: none;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0 10px;
+      gap: 10px;
+    }
+
+.grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .grid-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 250px;
+      color: white;
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      filter: brightness(60%);
+    }
+
+    .grid-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .grid-item .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      z-index: 2;
+    }
+
+    @media (max-width: 992px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+  </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../scss/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="../images/flogo.png" alt="케이스 성형외과 로고" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="about.html" data-bs-toggle="dropdown">클리닉소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="medical-staff.html">의료진 소개</a></li>
+                            <li><a class="dropdown-item" href="clinic-blog.html">클리닉 블로그</a></li>
+                            <li><a class="dropdown-item" href="directions.html">진료안내/오시는길</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="umbilicoplasty.html" data-bs-toggle="dropdown">배꼽성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="case-umbilicoplasty.html">케이스 배꼽성형</a></li>
+                            <li><a class="dropdown-item" href="faq-umbilicoplasty.html">궁금해요! 배꼽성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="eyelid-surgery.html" data-bs-toggle="dropdown">눈성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="nose-section1.html">케이스 기능성 눈성형</a></li>
+                            <li><a class="dropdown-item" href="nose-section2.html">궁금해요! 눈성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="rhinoplasty.html" data-bs-toggle="dropdown">코성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="rhinoplasty-design.html">케이스 코성형 디자인</a></li>
+                            <li><a class="dropdown-item" href="rhinoplasty-procedure.html">케이스 시술 안내</a></li>
+                            <li><a class="dropdown-item" href="faq-rhinoplasty.html">궁금해요! 코성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="anti-aging.html" data-bs-toggle="dropdown">동안시술</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="face-lift.html">케이스 안면거상</a></li>
+                            <li><a class="dropdown-item" href="botox.html">보톡스</a></li>
+                            <li><a class="dropdown-item" href="filler.html">필러</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="implant-removal.html">이물제거술</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="case-reviews.html">케이스 후기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="event.html">이벤트</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="#" id="userIcon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">KR</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-lang="en">EN</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ja">JA</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ch">CH</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="page-content" class="container my-5">
+        <!-- 페이지별 고유 콘텐츠가 여기에 들어갑니다 -->
+         
+  <!-- Hero Section -->
+  <section class="section">
+    <h4>케이스성형외과</h4>
+    <h1>BEAUTY WONDERLAND</h1>
+    <p>혁신적 의료 서비스와<br>뷰티 원스톱 솔루션을 통해 아름다움 그 이상의 가치를 제공합니다.</p>
+  </section>
+
+  <!-- 후기 섹션 -->
+  <h1 style="color: hotpink;">수술후기</h1>
+  <p>직접 경험한 리얼 후기 및 수술정보 공유</p>
+
+  <div class="filter-buttons">
+    <button class="active">전체</button>
+    <a href="review1.html" class="btn btn-outline-danger rounded-pill px-4">눈성형</a>
+    <a href="review2.html" class="btn btn-outline-danger rounded-pill px-4">코성형</a>
+    <a href="review3.html" class="btn btn-outline-danger rounded-pill px-4">안면윤곽</a>
+    <a href="review4.html" class="btn btn-outline-danger rounded-pill px-4">동안/리프팅</a>
+    <a href="review5.html" class="btn btn-outline-danger rounded-pill px-4">가슴성형</a>
+  </div>
+
+  <!-- 이벤트 베너 -->
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: auto;">
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324.png" alt="후기1" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>시간이 지나니까 정말 가름해지네요!! (윤곽 8개월차)</p>
+  </div>
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324_01.png" alt="후기2" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>윤곽으로 분위기가 완전 달라졌어요</p>
+  </div>
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324_02.png" alt="후기3" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>가슴성형, 저 고민 왜 했을까요!</p>
+  </div>
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324_03.png" alt="후기4" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>가슴성형, 저 고민 왜 했을까요!</p>
+  </div>
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324_04.png" alt="후기5" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>가슴성형, 저 고민 왜 했을까요!</p>
+  </div>
+  <div style="width: 250px;">
+    <a href="event-detail.html" target="_blank">
+      <img src="../images/KakaoTalk_20250626_150108324_05.png" alt="후기6" style="width: 100%; border-radius: 16px;">
+    </a>
+    <p>가슴성형, 저 고민 왜 했을까요!</p>
+  </div>
+</div><br>
+  
+<!-- 네비게이션 바에서 '케이스 후기' 항목 -->
+<a href="review-write.html" class="btn btn-primary"> ✍ 후기 작성하기</a>
+
+   <div class="pagination">
+    <span>&lt;</span>
+    <a class="active" href="#">1</a>
+    <a href="case-reviews1.html">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <span>...</span>
+    <a href="#">329</a>
+    <span>&gt;</span>
+  </div>
+
+  <!-- 대표원장 소개 및 비전 -->
+  <section class="section">
+    <h2 style="color: hotpink;">대표원장 소개</h2>
+    <p>20년 이상 시술 경험을 가진 이지훈 원장님의 철학과 케이스 성형외과의 비전을 소개합니다.</p>
+  </section>
+
+  <!-- 카카오맵 지도 
+  <section class="section">
+    <h2>찾아오시는 길</h2>
+    <div class="map-container">
+      <iframe src="https://map.kakao.com/link/map/케이스성형외과,37.5269,127.0286" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
+  -->
+
+  <!-- 구글맵 지도 -->
+<section class="section">
+  <h2>찾아오시는 길</h2>
+  <div class="map-container" style="position: relative; width: 100%; height: 400px;">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.3671787694873!2d127.02601131531236!3d37.52690047980224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca38f1134f711%3A0x12cb1f672b693a64!2z7JWE7Yq47ZWZ7JuQ7Iqk7Yq47Jq07YOA!5e0!3m2!1sko!2skr!4v1719463900000!5m2!1sko!2skr"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</section>
+
+  <!-- 상담/예약 -->
+  <section class="section">
+    <h2>빠른 상담/예약</h2>
+    <div class="cta-buttons">
+      <a href="https://pf.kakao.com/_xxxxxx" target="_blank">카카오톡 상담</a>
+      <a href="https://case-clinic.com/reservation" target="_blank">온라인 예약</a>
+    </div>
+  </section>
+
+
+<section class="grid">
+    <div class="grid-item">
+      <img src="../images/reviw1.png" alt="병원급 의료기관">
+      <div class="overlay-text">병원급 의료기관</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw2.png" alt="국가 인증 종합검진">
+      <div class="overlay-text">대학 병원급<br>국가인증 종합검진</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw3.png" alt="24시간 마취과 상주">
+      <div class="overlay-text">24시간<br>마취과 전문의 상주</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw4.png" alt="집도의 확인 수술 팔찌">
+      <div class="overlay-text">집도의 확인<br>수술 실명제</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw5.png" alt="CCTV 운영">
+      <div class="overlay-text">투명한 운영을 위한<br>CCTV 운영</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw6.png" alt="레이저 토탈 시스템">
+      <div class="overlay-text">수술-뺨떼시술-레이저<br>토탈 시스템</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw7.png" alt="중앙멸균 시스템">
+      <div class="overlay-text">6차례 멸균소독<br>중앙감지 시스템</div>
+    </div>
+    <div class="grid-item">
+      <img src="../images/reviw8.png" alt="응급처치 시스템">
+      <div class="overlay-text">위급상황<br>응급처치 시스템</div>
+    </div>
+  </section>
+
+  <!-- 후기 카드들 
+  <div class="review-card">
+    <div class="review-author">홍길동 <span class="review-date">· 2025.06.01</span></div>
+    <div class="review-content">눈성형을 받고 너무 만족해요!</div>
+  </div>
+  <div class="review-card">
+    <div class="review-author">김유진 <span class="review-date">· 2025.06.10</span></div>
+    <div class="review-content">코수술도 케어도 최고였어요.</div>
+  </div>
+  <div class="review-card">
+    <div class="review-author">김유진 <span class="review-date">· 2025.06.10</span></div>
+    <div class="review-content">코수술도 케어도 최고였어요.</div>
+  </div>
+-->
+</main>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>케이스 성형외과</h5>
+                    <p>서울특별시 강남구 논현로 848 8층<br>
+                    사업자등록번호: 123-45-67890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>진료시간</h5>
+                    <p>평일 10:00 - 19:00<br>
+                    토요일 10:00 - 17:00<br>
+                    일요일 및 공휴일 휴진</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>연락처</h5>
+                    <p>전화: 02-1234-5678<br>
+                    이메일: info@case-clinic.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 케이스 성형외과. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원 로그인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="아이디" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="비밀번호" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">로그인</button>
+                        <div class="social-login">
+                            <button type="button" class="btn btn-success w-100 mb-2">
+                                <i class="fab fa-naver"></i> 네이버로 로그인
+                            </button>
+                            <button type="button" class="btn btn-warning w-100 mb-2">
+                                <i class="fas fa-comment"></i> 카카오로 로그인
+                            </button>
+                            <button type="button" class="btn btn-danger w-100">
+                                <i class="fab fa-google"></i> 구글로 로그인
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html> 

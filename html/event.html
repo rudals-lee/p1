@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>케이스 성형외과</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <style>
+        @font-face {
+            font-family: 'WandocleanseaB';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .event-card img {
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .swiper {
+      padding-bottom: 40px;
+    }
+    .card-body {
+      background-color: #fff3e0;
+      border-top: 1px solid #eee;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+    }
+    .btn-warning {
+      background-color: #ffb74d;
+      border: none;
+    }
+    .btn-warning:hover {
+      background-color: #ffa726;
+    }
+    .swiper-slide{
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .event-banner {
+      background: url('../images/event-banner.jpg') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgb(49, 27, 27);
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .event-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s;
+    }
+
+    .event-card:hover {
+      transform: scale(1.02);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .event-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #c38b6b;
+    }
+
+    .event-desc {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .event-banner {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .event {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .event h2 {
+      color: #ff3c85;
+      margin-top: 0;
+    }
+
+    .event p {
+      line-height: 1.6;
+    }
+    </style>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../scss/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="../images/flogo.png" alt="케이스 성형외과 로고" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="about.html" data-bs-toggle="dropdown">클리닉소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="medical-staff.html">의료진 소개</a></li>
+                            <li><a class="dropdown-item" href="clinic-blog.html">클리닉 블로그</a></li>
+                            <li><a class="dropdown-item" href="directions.html">진료안내/오시는길</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="umbilicoplasty.html" data-bs-toggle="dropdown">배꼽성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="case-umbilicoplasty.html">케이스 배꼽성형</a></li>
+                            <li><a class="dropdown-item" href="faq-umbilicoplasty.html">궁금해요! 배꼽성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="nose-section1.html" data-bs-toggle="dropdown">눈성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="nose-section2.html">케이스 기능성 눈성형</a></li>
+                            <li><a class="dropdown-item" href="nose-section3.html">궁금해요! 눈성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="rhinoplasty.html" data-bs-toggle="dropdown">코성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="rhinoplasty-design.html">케이스 코성형 디자인</a></li>
+                            <li><a class="dropdown-item" href="rhinoplasty-procedure.html">케이스 시술 안내</a></li>
+                            <li><a class="dropdown-item" href="faq-rhinoplasty.html">궁금해요! 코성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="anti-aging.html" data-bs-toggle="dropdown">동안시술</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="face-lift.html">케이스 안면거상</a></li>
+                            <li><a class="dropdown-item" href="botox.html">보톡스</a></li>
+                            <li><a class="dropdown-item" href="filler.html">필러</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="implant-removal.html">이물제거술</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="case-reviews.html">케이스 후기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="event.html">이벤트</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="#" id="userIcon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">KR</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-lang="en">EN</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ja">JA</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ch">CH</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="page-content" class="container my-5">
+        <!-- 페이지별 고유 콘텐츠가 여기에 들어갑니다 -->
+
+  <!-- 🔹 이벤트 슬라이더 -->
+  <section class="container py-5">
+    <h2 class="text-center mb-4 fw-bold">프로모션 안내</h2>
+    <div class="swiper eventSwiper">
+      <div class="swiper-wrapper">
+
+        <!-- 🔁 슬라이드 1 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (1).png" class="card-img-top" alt="이벤트1" />
+            <div class="card-body text-center">
+              <h5 class="card-title">눈성형 할인 이벤트</h5>
+              <p class="card-text">2025.06.01 ~ 06.30</p>
+              <a href="https://pf.kakao.com/_AbCdEfG" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 2 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (2).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 3 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (3).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 4 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (4).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 5 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (5).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 🔁 슬라이드 6 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (6).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 7 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (7).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔁 슬라이드 8 -->
+        <div class="swiper-slide">
+          <div class="card event-card">
+            <img src="../images/promotion (8).png" class="card-img-top" alt="이벤트2" />
+            <div class="card-body text-center">
+              <h5 class="card-title">보톡스 20% 할인</h5>
+              <p class="card-text">2025.07.01 ~ 07.31</p>
+              <a href="https://pf.kakao.com/_EfGhIjK" class="btn btn-warning" target="_blank">카카오톡 상담</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 추가 슬라이드는 복제 -->
+
+      </div>
+
+      <!-- 네비게이션 -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+<!-- 이벤트 배너 -->
+  <header class="event-banner ">
+    ✨ 이달의 특별 이벤트 ✨
+  </header>
+
+<!-- 이벤트 카드 리스트 -->
+    <div class="row g-4">
+      
+      <!-- 이벤트 카드 1 -->
+      <div class="col-md-4">
+        <div class="event-card bg-white">
+          <img src="../images/events1.png" class="event-image" alt="이벤트1">
+          <div class="p-3">
+            <div class="event-title">눈성형 패키지 20% 할인</div>
+            <div class="event-desc">상담부터 수술까지 전과정 포함! 자연스러운 결과를 경험해보세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 이벤트 카드 2 -->
+      <div class="col-md-4">
+        <div class="event-card bg-white">
+          <img src="../images/events2.png" class="event-image" alt="이벤트2">
+          <div class="p-3">
+            <div class="event-title">리프팅/동안 패키지 1+1</div>
+            <div class="event-desc">레이저 리프팅과 스킨 보톡스를 한번에! 친구와 함께 받으면 더 혜택!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 이벤트 카드 3 -->
+      <div class="col-md-4">
+        <div class="event-card bg-white">
+          <img src="../images/events3.png" class="event-image" alt="이벤트3">
+          <div class="p-3">
+            <div class="event-title">여름맞이 코성형 10% 할인</div>
+            <div class="event-desc">자연스러운 라인과 기능성까지! 여름휴가 전 예약 시 추가 혜택!</div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="event-card bg-white">
+      <h2>🎁 여름맞이 눈성형 할인 이벤트</h2>
+      <p>자연스러운 쌍꺼풀과 또렷한 눈매를 위한 눈성형 이벤트 진행 중!<br>
+      - 기간: 2025.07.01 ~ 2025.07.31<br>
+      - 대상: 상담 예약자 전원<br>
+      - 혜택: 최대 30% 할인 + 회복 관리 서비스 제공</p>
+    </div>
+
+    <div class="event-card bg-white">
+      <h2>👃 코성형 디자인 무료상담</h2>
+      <p>개인의 얼굴 비율에 맞춘 1:1 코성형 디자인 제안!<br>
+      - 기간: 상시<br>
+      - 혜택: 첫 내원 고객 무료 CT + 상담 진행</p>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="https://pf.kakao.com/_xxxxxx" class="btn btn-primary btn-lg px-4" target="_blank">
+        카카오톡으로 상담하기
+      </a>
+    </div>
+
+    
+  </main>
+
+  </section>
+
+  <!-- 🔹 이벤트 등록 폼 -->
+  <section class="container py-5">
+    <h3 class="mb-4 fw-bold text-center">🎯 맞춤 이벤트 추천</h3>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">이벤트 제목</label>
+        <input type="text" class="form-control" placeholder="예: 여름 눈성형 할인 이벤트" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">이벤트 기간</label>
+        <input type="text" class="form-control" placeholder="예: 2025.07.01 ~ 07.31" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">이벤트 이미지 URL</label>
+        <input type="url" class="form-control" placeholder="예: /images/summer-event.png" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">카카오톡 상담 링크</label>
+        <input type="url" class="form-control" placeholder="예: https://pf.kakao.com/_XXXXXX" required>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">등록</button>
+
+      
+    </form>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper(".eventSwiper", {
+      loop: true,
+      spaceBetween: 30,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+    });
+  </script>
+  <!-- Bootstrap & Swiper -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" rel="stylesheet" />
+
+    </main>
+    <!-- Footer -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>케이스 성형외과</h5>
+                    <p>서울특별시 강남구 논현로 848 8층<br>
+                    사업자등록번호: 123-45-67890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>진료시간</h5>
+                    <p>평일 10:00 - 19:00<br>
+                    토요일 10:00 - 17:00<br>
+                    일요일 및 공휴일 휴진</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>연락처</h5>
+                    <p>전화: 02-1234-5678<br>
+                    이메일: info@case-clinic.com</p>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 케이스 성형외과. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원 로그인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="아이디" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="비밀번호" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">로그인</button>
+                        <div class="social-login">
+                            <button type="button" class="btn btn-success w-100 mb-2">
+                                <i class="fab fa-naver"></i> 네이버로 로그인
+                            </button>
+                            <button type="button" class="btn btn-warning w-100 mb-2">
+                                <i class="fas fa-comment"></i> 카카오로 로그인
+                            </button>
+                            <button type="button" class="btn btn-danger w-100">
+                                <i class="fab fa-google"></i> 구글로 로그인
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html> 

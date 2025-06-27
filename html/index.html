@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>케이스 성형외과</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <style>
+        @font-face {
+            font-family: 'WandocleanseaB';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'WandocleanseaB', sans-serif;
+            background: linear-gradient(to bottom, #FCF8F0 0%, #E8E2D1 100%);
+        }
+    </style>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../scss/styles.css">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="../images/flogo.png" alt="케이스 성형외과 로고" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">                    
+                    <!-- Main Menu Items -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="about.html" data-bs-toggle="dropdown">클리닉소개</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="medical-staff.html">의료진 소개</a></li>
+                            <li><a class="dropdown-item" href="clinic-blog.html">클리닉 블로그</a></li>
+                            <li><a class="dropdown-item" href="directions.html">진료안내/오시는길</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="umbilicoplasty.html" data-bs-toggle="dropdown">배꼽성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="case-umbilicoplasty.html">케이스 배꼽성형</a></li>
+                            <li><a class="dropdown-item" href="faq-umbilicoplasty.html">궁금해요! 배꼽성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="eyelid-surgery.html" data-bs-toggle="dropdown">눈성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="nose-section1.html">케이스 기능성 눈성형</a></li>
+                            <li><a class="dropdown-item" href="nose-section2.html">궁금해요! 눈성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="rhinoplasty.html" data-bs-toggle="dropdown">코성형</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="rhinoplasty-design.html">케이스 코성형 디자인</a></li>
+                            <li><a class="dropdown-item" href="rhinoplasty-procedure.html">케이스 시술 안내</a></li>
+                            <li><a class="dropdown-item" href="faq-rhinoplasty.html">궁금해요! 코성형</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="anti-aging.html" data-bs-toggle="dropdown">동안시술</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="face-lift.html">케이스 안면거상</a></li>
+                            <li><a class="dropdown-item" href="botox.html">보톡스</a></li>
+                            <li><a class="dropdown-item" href="filler.html">필러</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="implant-removal.html">이물제거술</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="case-reviews.html">케이스 후기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="event.html">이벤트</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="#" id="userIcon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">KR</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-lang="en">EN</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ja">JA</a></li>
+                            <li><a class="dropdown-item" href="#" data-lang="ch">CH</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Carousel -->
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Carousel items will be added dynamically via JavaScript -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- Carousel Promo Text (프로모션 문구) -->
+    <div class="carousel-promo-text">
+        <p class="line-1"></p>
+        <p class="line-2"></p>
+    </div>
+
+    <!-- Quick Consultation Bar -->
+    <div class="quick-consult-bar">
+        <div class="container">
+            <form id="consultForm" class="consult-form">
+                <!-- 1줄: 이름, 연락처, 상담선택 -->
+                <div class="form-row first-row"> <!-- form-row는 모바일에서 줄바꿈 되는 행을 만들어줌 -->
+                    <div class="form-item">
+                        <input type="text" class="form-control text-center" id="name" placeholder="이름" required>
+                    </div>
+                    <div class="form-item">
+                        <input type="tel" class="form-control text-center" id="phone" placeholder="연락처" required>
+                    </div>
+                    <div class="form-item">
+                        <select class="form-select text-center" id="consultType" required>
+                            <option value="" selected disabled>상담선택</option>
+                            <option value="배꼽성형">배꼽성형</option>
+                            <option value="눈성형">눈성형</option>
+                            <option value="코성형">코성형</option>
+                            <option value="동안시술">동안시술</option>
+                            <option value="이물제거">이물제거</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- 2줄: 개인정보처리방침 동의, 상담신청 버튼 -->
+                <div class="form-row second-row">
+                    <div class="privacy-agreement">
+                        <span class="privacy-text">개인정보 처리방침 동의</span>
+                        <input class="form-check-input" type="checkbox" id="privacyAgree" required>
+                    </div>
+                    <div class="form-item">
+                        <button type="submit" class="btn btn-primary w-100 ask1">상담신청</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원 로그인</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="아이디" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="비밀번호" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">로그인</button>
+                        <div class="social-login">
+                            <button type="button" class="btn btn-success w-100 mb-2">
+                                <i class="fab fa-naver"></i> 네이버로 로그인
+                            </button>
+                            <button type="button" class="btn btn-warning w-100 mb-2">
+                                <i class="fas fa-comment"></i> 카카오로 로그인
+                            </button>
+                            <button type="button" class="btn btn-danger w-100">
+                                <i class="fab fa-google"></i> 구글로 로그인
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
