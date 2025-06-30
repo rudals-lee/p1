@@ -1,0 +1,512 @@
+// eyelid-surgery.html 전용 스타일
+
+.eye-hero-section {
+    display: flex;
+    // align-items: center;
+    min-height: 100vh;
+    padding: 6rem 0;
+    background-color: #fdfdfd; // 전체적인 밝은 톤 배경
+}
+
+.eye-hero-section .section-title { // 눈성형 타이틀
+    // text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    color: #333;
+}
+
+#eyeHeroTabs {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 3rem;
+}
+
+#eyeHeroTabs .nav-link {
+    border: 0;
+    color: #666;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    position: relative;
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+#eyeHeroTabs .nav-link.active {
+    color: #000;
+    font-weight: 700;
+    border-bottom-color: #bd8f60; // 포인트 컬러
+}
+
+#eyeHeroCarousel .carousel-item {
+    padding: 0 1rem;
+}
+
+#eyeHeroCarousel img {
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-caption-reimagined {
+    text-align: left;
+    color: #333;
+    padding: 0 1rem 0 3rem; // 이미지와의 간격
+}
+
+.carousel-caption-reimagined h3 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #bd8f60; // 포인트 컬러
+    margin-bottom: 1.5rem;
+}
+
+.carousel-caption-reimagined p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+#eyeHeroCarousel .carousel-control-prev,
+#eyeHeroCarousel .carousel-control-next {
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+#eyeHeroCarousel .carousel-control-prev {
+    left: -5rem; // 캐러셀 바깥으로 이동
+}
+
+#eyeHeroCarousel .carousel-control-next {
+    right: -5rem; // 캐러셀 바깥으로 이동
+}
+
+#eyeHeroCarousel .carousel-control-prev:hover,
+#eyeHeroCarousel .carousel-control-next:hover {
+    background-color: white;
+    opacity: 1;
+}
+
+#eyeHeroCarousel .carousel-control-prev-icon,
+#eyeHeroCarousel .carousel-control-next-icon {
+    background-image: none; // 기본 아이콘 제거
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #333; // 아이콘 컬러
+    font-size: 1.5rem;
+    position: relative;
+}
+
+// Font Awesome 아이콘 사용을 위한 가상 요소 설정
+#eyeHeroCarousel .carousel-control-prev-icon::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f053"; // 왼쪽 화살표
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#eyeHeroCarousel .carousel-control-next-icon::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f054"; // 오른쪽 화살표
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+// 반응형 스타일
+@media (max-width: 1200px) {
+    #eyeHeroCarousel .carousel-control-prev {
+        left: 0.5rem;
+    }
+    #eyeHeroCarousel .carousel-control-next {
+        right: 0.5rem;
+    }
+}
+
+
+@media (max-width: 991.98px) {
+    .eye-hero-section {
+        padding: 4rem 0;
+        align-items: flex-start;
+    }
+    .carousel-caption-reimagined {
+        padding: 2rem 0 0 0;
+        text-align: center;
+    }
+    #eyeHeroCarousel .row > div {
+        width: 100%;
+    }
+}
+
+// AOS 슬라이드업 애니메이션 (AOS.js가 자동 적용)
+// _eye.scss 파일 내용
+section[data-aos] {
+  opacity: 0; // 1. 처음엔 투명하게 (Fade)
+  transform: translateY(40px); // 2. 아래쪽에 위치 (Slide)
+  transition: opacity 0.4s, transform 1s; // 3. 이 두가지가 0.8초에 걸쳐 변화
+}
+section[data-aos].aos-animate {
+  opacity: 1; // 1. 완전히 불투명하게 (Fade-in 완료)
+  transform: translateY(-3.5rem); // 2. 제자리로 이동 (Slide-up 완료)
+}
+// 최상단 이동 버튼
+#scrollToTopBtn {
+  position: fixed;
+  right: 2.5rem;
+  bottom: 6.5rem;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  background: #FF7A6B;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+#scrollToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================
+   Eye Surgery Sections General
+   ========================================= */
+.eye-section {
+    padding: 6rem 0;
+    background-color: #F8F6F2; // 베이지 배경
+    color: #383838;
+}
+
+.eye-section:nth-of-type(even) { // 짝수 섹션은 다른 배경색
+    background-color: #FFFFFF;
+}
+
+.eye-section .section-title {
+    font-family: 'S-Core Dream', sans-serif;
+    font-weight: 600;
+}
+.eye-section .description {
+    font-family: 'SUIT', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.eye-vh-section {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   Section 2: Word of Mouth & Gallery
+   ========================================= */
+.eye-section-2 {
+    background: linear-gradient(to bottom, #f3efea, #e9e4d9);
+    .section-titles {
+        margin-bottom: 4rem;
+    }
+    .section-subtitle {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    .section-quote {
+        font-family: 'Arita-buri', serif;
+        font-size: 1.5rem;
+        color: #5a5a5a;
+    }
+    .image-grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 1/1;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .grid-item.text-box {
+        display: none; // 데스크탑에서는 숨김
+    }
+}
+
+
+/* =========================================
+   Shared Styles for Sections 3, 4, 5
+   ========================================= */
+.eye-vh-section .text-content {
+    .section-title {
+        font-size: 2.5rem;
+        line-height: 1.4;
+    }
+    .pre-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    .highlight {
+        color: #bd8f60;
+        font-weight: 600;
+    }
+    .btn-primary-custom {
+        background-color: #FF7A6B; // 코랄 피치 색상
+        color: white;
+        padding: 0.8rem 2.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+        &:hover {
+            background-color: darken(#FF7A6B, 5%);
+        }
+    }
+}
+
+/* =========================================
+   Section 3: Special Points
+   ========================================= */
+   .eye-section-3 .text-content {margin-left:auto;}
+   .eye-section-3 {
+    .btn-tag {
+        width: 100%;
+        background-color: #f0ebe5;
+        border: 1px solid #e0d9d0;
+        color: #50463e;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+        
+        transition: background-color 0.3s, border-color 0.3s;
+        &:hover {
+            background-color: #e6dfd8;
+        }
+    }
+}
+
+/* =========================================
+   Section 4: Trust & Professionalism
+   ========================================= */
+.eye-section-4 {
+    .info-icons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 1.5rem;
+    }
+    .info-icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .icon-wrapper {
+        width: 70px;
+        height: 70px;
+        background-color: #ede7e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        color: #796a5c;
+        svg {
+            width: auto;
+            height: 32px; // SVG 아이콘 높이 통일
+        }
+    }
+    .text-wrapper {
+        span {
+            font-weight: 600;
+            display: block;
+        }
+        small {
+            font-size: 0.9rem;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+    }
+}
+
+
+/* =========================================
+   Section 5: Functional Eyelid Surgery
+   ========================================= */
+// Section 5 has no unique styles other than shared ones.
+
+
+/* =========================================
+    Footer
+   ========================================= */
+.footer-contact {
+    position: relative;
+    .social-icons {
+        position: absolute;
+        right: 15px;
+        bottom: 20px;
+        display: flex;
+        gap: 10px;
+        a img {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+
+/* =========================================
+   Responsive Styles
+   ========================================= */
+@media (min-width: 992px) {
+    .eye-section-3, .eye-section-4, .eye-section-5 {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        .container {
+            width: 100%;
+            z-index: 2;
+        }
+        .text-content {
+            max-width: 50%;
+        }
+    }
+
+    .eye-section-3 {
+        background-image: url('../images/eye/eye-section3-desktop.png');
+        justify-content: flex-end;
+        .text-content {
+            padding: 0 4rem;
+            margin-right: 5%;
+        }
+    }
+    
+    .eye-section-4, .eye-section-5 {
+        color: white;
+
+        .text-content {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.15);
+            z-index: 1;
+        }
+    }
+
+    .eye-section-4 {
+        background-image: url('../images/eye/eye-section4-desktop.png');
+        justify-content: flex-start;
+        
+        .text-content {
+            margin-left: 5%;
+            padding: 0 4rem;
+        }
+
+        .info-icons-grid {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .icon-wrapper {
+            background-color: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+        .text-wrapper {
+            color: #fff;
+            small { color: #eee; }
+        }
+    }
+
+    .eye-section-5 {
+        background-image: url('../images/eye/eye-section5-desktop.png');
+        justify-content: flex-start;
+
+        .text-content {
+            margin-left: 5%;
+            padding: 0 4rem;
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    .eye-section, .eye-vh-section {
+        padding: 4rem 0;
+    }
+    .eye-vh-section {
+        min-height: auto;
+        text-align: center;
+    }
+    .eye-vh-section .text-content {
+        margin-top: 3rem;
+    }
+    .eye-section-4 .info-icons-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .footer-contact .social-icons {
+        position: static;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 767.98px) {
+    .eye-section-2 {
+        .section-titles {
+            display: none; // 모바일에서는 타이틀 숨김
+        }
+        .image-grid-container {
+            grid-template-columns: repeat(2, 1fr);
+            // 10개 아이템 그리드
+            .grid-item.text-box {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #e9e4d9;
+                border-radius: 12px;
+                padding: 1rem;
+                text-align: center;
+                .section-subtitle { font-size: 1.5rem; }
+                .section-quote { font-size: 1.1rem; margin-bottom: 0; }
+            }
+        }
+    }
+}
+@media (max-width: 575.98px) {
+    .eye-section-4 .info-icons-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+} 

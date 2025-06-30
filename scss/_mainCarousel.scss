@@ -1,6 +1,75 @@
 /* =========================================
    메인 캐러셀 반응형 아트 디렉션 (최종 통합본)
    ========================================= */
+ 
+/**
+ * 이 CSS 블록은 우리가 최종적으로 선택한 '배경 이미지' 기법을 위한 스타일입니다.
+ * JavaScript가 동적으로 생성한 div.carousel-item에 배경 이미지를 설정하고,
+ * 그 이미지가 모든 화면 크기에서 최적으로 보이도록 제어하는 모든 규칙이 담겨있습니다.
+ *
+ * [핵심 수정] 캐러셀 높이는 이제 JS에서 동적으로 계산하여 `#mainCarousel`에 직접 적용합니다.
+ * 따라서 `.carousel-item`은 부모의 100% 높이를 따르도록 변경합니다.
+ */
+ #mainCarousel {
+    position: relative; // 내부 아이템의 절대 위치 기준점 제공
+    width: 100%;
+    overflow: hidden; // 내용이 넘치면 잘라내기
+    /* height와 max-height는 이제 JS에서 adjustCarouselHeight 함수에서 동적으로 설정하므로 여기서는 제거합니다. */
+}
+
+#mainCarousel .carousel-item {
+    height: 100%;
+    max-height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/* =========================================
+   특정 캐러셀 아이템 위치 미세 조정 (데스크톱)
+   ========================================= */
+/**
+ * JS에서 추가한 '.slide-X-position' 클래스를 가진 요소에만
+ * 별도의 background-position 값을 적용하여 위치를 조정합니다.
+ */
+#mainCarousel .slide-2-position { // 기존 'slide-2-special-position'에서 클래스명 변경 (JS와 통일)
+    /**
+     * 데스크톱 기본 위치 조정
+     * 가로 위치(right)는 유지하고, 세로 위치만 기본값(center, 50%)에서
+     * calc() 함수를 이용해 1vh만큼 위로 올립니다.
+     */
+    background-position: right calc(50% - 10vh);
+}
+
+/* [기존 주석 유지] @media (max-width: 768px)는 "브라우저 화면 너비가 768px 이하일 경우에만 적용하라"는 규칙입니다. */
+@media (max-width: 768px) {
+    #mainCarousel .carousel-item {
+        /* [수정] 모바일 기본 위치를 왼쪽으로 70px 이동 */
+        background-position: calc(80% - 130px) 20%;
+    }
+
+    // 기존 slide-2-position 규칙 유지
+    #mainCarousel .slide-2-position {
+        background-position: 80% calc(20% - 3vh);
+    }
+
+    /* =========================================
+       [신규 추가] main-slider-7 모바일 이미지 교체
+       ========================================= */
+    #mainCarousel .slide-7-position.mobile-replace-image-7 {
+        background-image: url('../images/main-slider7b.png') !important;
+    }
+
+    // [제거] main-slider-3.png (slide-3-position)에 대한 모바일 특정 스타일은 더 이상 필요 없습니다.
+    // 기본 .carousel-item 스타일(background-position: calc(80% - 70px) 20%)을 따릅니다.
+}
+
+@media (max-width: 991px) {
+    #mainCarousel .slide-3-position {
+        background-size: auto 80vh; // 추천: auto 80vh, 필요시 70vh 등 실시간 조정
+        background-position: center 35%; // 추천: center 35%, 필요시 40% 등 실시간 조정
+    }
+}
    
    #mainCarousel .carousel-item {
     background-size: cover;
@@ -24,6 +93,9 @@
 }
 
 
+
+
+
 // 기존 모바일 미디어 쿼리
 @media (max-width: 768px) {
     #mainCarousel .carousel-item {
@@ -45,20 +117,23 @@
         background-image: url('../images/main-slider7b.png') !important;
         background-position: center center; // 수정된 부분
         background-size: cover; 
-    
+    }
+    #mainCarousel .slide-2-position.mobile-replace-image-2 {
+        background-image: url('../images/main-slider2b.png') !important;
+        background-position: center center; // 수정된 부분
+        background-size: cover; 
+    }
        // main-slider7.png (인덱스 7)    
     #mainCarousel .carousel-item:nth-child(8) { // CSS nth-child는 1부터 시작하므로 7번째 이미지는 8번째 자식
-        background-position: calc(80% - 70px) 20%; /* 기존 모바일 위치에서 왼쪽으로 70px 이동 */
+        background-position: calc(80% - 20px) 20%; // 왼쪽으로 20px 이동
     }
       // main-slider2.png (인덱스 2) 
     #mainCarousel .carousel-item:nth-child(3) { // CSS nth-child는 1부터 시작하므로 3번째 이미지는 3번째 자식
-        background-position: calc(80% - 30px) -20% !important; // 왼쪽으로 30px 이동 / 위로 20% 이동
-    }
+        background-position: 0% -90% !important; // 왼쪽으로 0px 이동 / 위로 90% 이동
+       }
      // main-slider3.png (인덱스 3)
     #mainCarousel .carousel-item:nth-child(4) { // CSS nth-child는 1부터 시작하므로 3번째 이미지는 4번째 자식
         background-position: calc(80% - 30px) 20%; /* 기존 모바일 위치에서 왼쪽으로 30px 이동 */
-    }
-  
     }
 }
 .carousel-promo-text {
@@ -66,18 +141,76 @@
     bottom: calc(var(--consult-bar-height, 56px) + 13vh) !important; // 하단바 높이에 따라 동적 조정 가능 
     left: 0;
     width: 100%;
-    p{ font-size: 7.2vw !important;};
+    p{ font-size: 7.2vw !important;
+        line-height: 1.2;
+    };
     text-align: center;
     color: #fff;
     z-index: 20;
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
 }
 
+// scss/styles.scss 파일의 일부
+.carousel-promo-text {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    bottom: calc(var(--consult-bar-height) + 20px); /* 하단 바와의 간격 살짝 추가 */
+    z-index: 1040;
+    text-align: center;
+    pointer-events: none;
+    color: #FFFFFF; /* 글자 색상을 흰색으로 변경 */
+    font-family: "WandocleanseaB", sans-serif;
+    background: none;
+    transition: bottom 0.3s;
+    right: 0;
+    padding: 0;
+  }
 
+  /* =========================================
+   [업그레이드] 캐러셀 프로모션 텍스트 (컬러 글로우 효과)
+   ========================================= */
+.carousel-promo-text p {
+    // 기존 폰트, 크기, 정렬 등은 그대로 유지합니다.
+    margin: 0;
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  
+    /**
+     * [핵심] 포인트 컬러 글로우(Glow) + 가독성 그림자
+     * 역할: 2단계 그림자 처리를 통해, 어떤 배경에서도 글자가 잘 보이게 하고,
+     * 동시에 포인트 컬러가 은은하게 빛나는 듯한 고급스러운 효과를 만듭니다.
+     *
+     * 1단계 (안쪽 그림자): 포인트 컬러(#FF7A6B)를 사용하여 글자 주변에
+     * 부드러운 빛 번짐(Glow) 효과를 만듭니다.
+     * 2단계 (바깥쪽 그림자): 어둡고 넓은 그림자를 추가하여, 1단계의 빛 번짐 효과를
+     * 더욱 돋보이게 만들고, 밝은 배경 위에서도 글자의 형태를 명확하게 잡아줍니다.
+     */
+    text-shadow:
+      /* 1단계: 포인트 컬러 글로우 (안쪽) */
+      5px 5px 15px var(--color-primary, #FF7A6B),
+      
+      /* 2단계: 가독성을 위한 어두운 그림자 (바깥쪽) */
+      2px 2px 15px rgba(0, 0, 0, 0.5); 
+  }
+ 
+@media (max-width: 768px) {
+    .carousel-promo-text p {
+      font-size: 1.6rem; /* 모바일 크기 비례하여 키움 */
+    }
+  }
+  
+@media (max-width: 991.99px) {
+    .carousel-promo-text p {
+      font-size: 2rem; /* 모바일 크기 비례하여 키움 */
+    }
+  }
 @media (min-width:991.99px) {
     .carousel-promo-text {
         top:50vh;
-        transform: translateX(-10%); 
+        transform: translateX(-10%);
         width:40%;
         p { font-size: 3.9rem !important; // 더 큼직하게
             line-height: 1.2;

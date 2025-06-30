@@ -1,6 +1,7 @@
 @use 'reset' as *;
 @use 'mainNavbar' as *;
 @use 'mainCarousel' as *; 
+@use 'eye';
 // mainCarousel 스타일이 이 파일 내에 직접 정의되어 있으므로 주석 처리하거나 제거합니다.
 
 
@@ -25,10 +26,16 @@
     --consult-bar-height: 80px; /* 하단 상담 바 높이 (JS 로드 전 기본값) */
 }
 
-body {
-    background: linear-gradient(to bottom, var(--color-background-start) 0%, var(--color-background-end) 100%);
-    font-family: 'WandocleanseaB', sans-serif;
+/* =========================================
+   전역 스타일 및 변수 (Global Styles & Variables)
+   ========================================= */
 
+// ... :root 변수 부분은 그대로 둡니다 ...
+
+body {
+  background: linear-gradient(to bottom, var(--color-background-start) 0%, var(--color-background-end) 100%);
+  // [수정] 기본 폰트를 'SUIT'로 변경합니다.
+  font-family: 'SUIT', sans-serif;
     /**
      * [수정] JavaScript가 계산한 네비바 높이만큼 body의 상단 안쪽 여백을 확보합니다.
      * 하단 padding은 이제 JS의 `setDynamicHeights` 함수에서 직접 관리합니다.
@@ -37,79 +44,38 @@ body {
     padding-top: var(--navbar-height);
     // padding-bottom은 JS에서 직접 관리하므로 여기서 제거
 }
-
-
 /* =========================================
-   메인 캐러셀 반응형 아트 디렉션 (최종 통합본)
+   [신규 추가] 폰트 시스템 적용
    ========================================= */
 /**
- * 이 CSS 블록은 우리가 최종적으로 선택한 '배경 이미지' 기법을 위한 스타일입니다.
- * JavaScript가 동적으로 생성한 div.carousel-item에 배경 이미지를 설정하고,
- * 그 이미지가 모든 화면 크기에서 최적으로 보이도록 제어하는 모든 규칙이 담겨있습니다.
- *
- * [핵심 수정] 캐러셀 높이는 이제 JS에서 동적으로 계산하여 `#mainCarousel`에 직접 적용합니다.
- * 따라서 `.carousel-item`은 부모의 100% 높이를 따르도록 변경합니다.
+ * '폰트사용지침.png'에 명시된 규칙에 따라
+ * 각 태그별로 기본 폰트를 지정합니다.
  */
-#mainCarousel {
-    position: relative; // 내부 아이템의 절대 위치 기준점 제공
-    width: 100%;
-    overflow: hidden; // 내용이 넘치면 잘라내기
-    /* height와 max-height는 이제 JS에서 adjustCarouselHeight 함수에서 동적으로 설정하므로 여기서는 제거합니다. */
+ h1, h2, .main-title {
+  // 메인 타이틀용 폰트
+  font-family: 'S-Core Dream', sans-serif;
 }
 
-#mainCarousel .carousel-item {
-    height: 100%;
-    max-height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right center;
+.sub-title {
+  font-family: 'SUIT', sans-serif;
+  font-weight: 700; // Bold
+}
+h3, h4, {
+  // 서브 타이틀용 폰트
+  font-family: 'SUIT', sans-serif;
+  font-weight: 600; // SemiBold
+}
+h5, h6 {
+  font-family: 'SUIT', sans-serif;
+  font-weight: 300; // Light
 }
 
-/* =========================================
-   특정 캐러셀 아이템 위치 미세 조정 (데스크톱)
-   ========================================= */
-/**
- * JS에서 추가한 '.slide-X-position' 클래스를 가진 요소에만
- * 별도의 background-position 값을 적용하여 위치를 조정합니다.
- */
-#mainCarousel .slide-2-position { // 기존 'slide-2-special-position'에서 클래스명 변경 (JS와 통일)
-    /**
-     * 데스크톱 기본 위치 조정
-     * 가로 위치(right)는 유지하고, 세로 위치만 기본값(center, 50%)에서
-     * calc() 함수를 이용해 1vh만큼 위로 올립니다.
-     */
-    background-position: right calc(50% - 10vh);
+.review-text, .emotional-text {
+  // 후기/감성 텍스트용 폰트
+  font-family: 'Arita-buri', serif;
+  font-weight: 300; // Light
 }
 
-/* [기존 주석 유지] @media (max-width: 768px)는 "브라우저 화면 너비가 768px 이하일 경우에만 적용하라"는 규칙입니다. */
-@media (max-width: 768px) {
-    #mainCarousel .carousel-item {
-        /* [수정] 모바일 기본 위치를 왼쪽으로 70px 이동 */
-        background-position: calc(80% - 130px) 20%;
-    }
-
-    // 기존 slide-2-position 규칙 유지
-    #mainCarousel .slide-2-position {
-        background-position: 80% calc(20% - 3vh);
-    }
-
-    /* =========================================
-       [신규 추가] main-slider-7 모바일 이미지 교체
-       ========================================= */
-    #mainCarousel .slide-7-position.mobile-replace-image-7 {
-        background-image: url('../images/main-slider7b.png') !important;
-    }
-
-    // [제거] main-slider-3.png (slide-3-position)에 대한 모바일 특정 스타일은 더 이상 필요 없습니다.
-    // 기본 .carousel-item 스타일(background-position: calc(80% - 70px) 20%)을 따릅니다.
-}
-
-@media (max-width: 991px) {
-    #mainCarousel .slide-3-position {
-        background-size: auto 80vh; // 추천: auto 80vh, 필요시 70vh 등 실시간 조정
-        background-position: center 35%; // 추천: center 35%, 필요시 40% 등 실시간 조정
-    }
-}
 
 /* =========================================
    하단 빠른 상담 바 (Quick Consultation Bar)
@@ -307,7 +273,7 @@ body {
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5); /* 어두운 그림자로 변경하여 가독성 확보 */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* 어두운 그림자로 변경하여 가독성 확보 */
 }
 
 @media (max-width: 991px) {
@@ -321,7 +287,7 @@ body {
   }
 }
 
-@charset "UTF-8";
+@charset "UTF-8"; 
 /* =========================================
    CSS 초기화 (Modern CSS Reset)
    ========================================= */
@@ -628,3 +594,30 @@ body {
   border: 1px solid #DDD;
   margin-bottom: 1rem;
 }/*# sourceMappingURL=styles.css.map */
+
+
+/* =========================================
+   최상단 이동 버튼 (상담바 우측 하단에 위치)
+   ========================================= */
+
+#scrollToTopBtn {
+  position: fixed !important;       /* 화면에 고정 */
+  bottom: 30px !important;          /* 하단으로부터 30px */
+  right: 30px !important;           /* 우측으로부터 30px */
+  z-index: 9999;          /* 다른 요소보다 위에 오도록 설정 */
+  padding: 10px 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   포인트 스타일 (포인트 컬러 적용)
+   ========================================= */
+   .goldpoint {
+    color: #bd8f60;
+   }

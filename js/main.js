@@ -30,6 +30,49 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustPromoTextPosition();
     // [신규] 모바일 플라이아웃 메뉴 기능 초기화
     setupMobileFlyoutMenu();
+
+    // Section 1: 캐러셀 Step 탭-슬라이드 연동
+    const eyeHeroCarousel = document.getElementById('eyeHeroCarousel');
+    const eyeHeroTabs = document.querySelectorAll('#eyeHeroTabs .nav-link');
+
+    if (eyeHeroCarousel && eyeHeroTabs.length) {
+        // 탭 클릭시 캐러셀 이동
+        eyeHeroTabs.forEach(tab => {
+            tab.addEventListener('click', function (event) {
+                const slideIndex = this.getAttribute('data-bs-slide-to');
+                const carousel = bootstrap.Carousel.getOrCreateInstance(eyeHeroCarousel);
+                carousel.to(slideIndex);
+            });
+        });
+
+        // 캐러셀 슬라이드 시 탭 활성화
+        eyeHeroCarousel.addEventListener('slid.bs.carousel', function (event) {
+            const activeTabIndex = event.to;
+            eyeHeroTabs.forEach((tab, index) => {
+                if (index === activeTabIndex) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // 최상단 이동 버튼 기능
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    window.addEventListener('scroll', function() {
+        if (!scrollToTopBtn) return;
+        if (window.scrollY > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    if (scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });
 
 window.addEventListener('resize', function() { // 기존 window.addEventListener('resize', setDynamicHeights); 라인을 수정
@@ -83,6 +126,10 @@ function initCarousel() {
         // main-slider-7 (인덱스 7, 즉 8번째 슬라이드)에만 모바일용 이미지 교체를 위한 클래스 추가
         if (i === 7) {
             div.classList.add('mobile-replace-image-7');
+        }
+        // main-slider-2 (인덱스 2, 즉 3번째 슬라이드)에만 모바일용 이미지 교체를 위한 클래스 추가
+        if (i === 2) {
+            div.classList.add('mobile-replace-image-2');
         }
 
         // 각 슬라이드를 클릭하면 지정된 페이지로 이동하는 이벤트를 추가합니다.
@@ -226,19 +273,34 @@ const promoTexts = [
     { line1: '콧대가 살아나니', line2: '자신감이 생겼어요.' },
     { line1: '동안 시술로', line2: '10년은 젊어진 느낌!' },
     { line1: '이물질 걱정 끝!', line2: '안전하게 제거했어요.' },
-    { line1: '후기만 믿고 왔는데', line2: '정말 만족합니다.' },
+    { line1: '소문 듣고 왔는데', line2: '정말 만족해요.' },
     { line1: '이벤트 혜택까지', line2: '지금이 기회예요!' }
 ];
 
-// [프로모션 문구 업데이트 함수]
-function updatePromoText(slideIndex) {
+    // [프로모션 문구 업데이트 함수]
+    function updatePromoText(slideIndex) {
     const promo = promoTexts[slideIndex] || { line1: '', line2: '' };
     const line1 = document.querySelector('.carousel-promo-text .line-1');
     const line2 = document.querySelector('.carousel-promo-text .line-2');
-    if (line1) line1.textContent = promo.line1;
-    if (line2) line2.textContent = promo.line2;
+    
+    // 밝은 배경 슬라이드들 (2, 4, 6번)에만 강화된 그림자 적용
+    const isBrightBackground = [2, 4, 6].includes(slideIndex);
+    
+    const textShadow = isBrightBackground 
+        ? '0 0 15px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.85), 2px 2px 7px var(--color-primary,rgb(192, 151, 89))'
+        : '4 4 10px rgba(0,0,0,0.9), 5px 5px 10px rgba(0,0,0,0.9), 5px 5px 10px rgba(0,0,0,0.9)';
+    
+    if (line1) {
+        line1.textContent = promo.line1;
+        line1.style.color = '#ffffff';
+        line1.style.textShadow = textShadow;
+    }
+    if (line2) {
+        line2.textContent = promo.line2;
+        line2.style.color = '#ffffff';
+        line2.style.textShadow = textShadow;
+    }
 }
-
 // [추가] 프로모션 텍스트 위치를 consult bar 높이에 맞게 동적으로 조정하는 함수
 function adjustPromoTextPosition() {
     const promoText = document.querySelector('.carousel-promo-text');
@@ -363,3 +425,4 @@ function getFlyoutLeftPosition() {
     // 가장 긴 메뉴의 오른쪽 끝 + 약간의 여백(1rem)
     return longestWidth +1; // 16px = 1rem
 }
+

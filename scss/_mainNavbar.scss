@@ -21,7 +21,7 @@
      * background-color 속성 값 뒤에 !important를 추가합니다.
      * 이 작은 수정이 '톤앤매너가 깨지는' 현상을 해결해 줄 것입니다.
      */
-    background-color: transparent !important;
+     background: linear-gradient(to bottom, var(--color-background-start, #FCF8F0) 0%, var(--color-background-end, #E8E2D1) 100%);
   
     /**
      * [문제 1 해결] 불필요한 가로줄의 원인이었던 border 속성을 수정합니다.
@@ -88,8 +88,16 @@
   .nav-link.dropdown-toggle::after {
     display: none;
   }
-  
-  
+  // [추가] 데스크탑 드롭다운 호버 동작 (겹침 방지)
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+// [추가] 다른 메뉴 호버 시 기존 열린 메뉴 자동 닫기
+.navbar-nav .nav-item:not(:hover) .dropdown-menu {
+  display: none !important;
+}
+
   // =========================================
   //  모바일 화면 스타일 (화면 너비 991.98px 이하)
   //  - @media 쿼리는 특정 조건에서만 스타일을 적용하라는 CSS 규칙입니다.
@@ -157,7 +165,7 @@
     .navbar-nav .nav-link,
     .navbar-nav .dropdown-item {
       color: #ffffff !important; // 어두운 배경 위이므로 기본 글자색을 흰색으로 변경
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     //   border-bottom: 1px solid rgba(255, 255, 255, 0.1); // 메뉴 사이에 희미한 구분선 추가 부분 주석처리리
   
       // [문제 2 해결] 메뉴 텍스트를 중앙이 아닌 왼쪽으로 정렬합니다.

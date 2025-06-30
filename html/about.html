@@ -12,95 +12,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
-<style>
-    @font-face {
-      font-family: 'WandocleanseaB';
-      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaB.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'WandocleanseaB', 'Noto Sans KR', sans-serif;
-      background: #fdfdfb;
-      color: #333;
-      text-align: center;
-    }
-
-    nav a.active {
-      border-bottom: 2px solid #c38b6b;
-      color: #c38b6b;
-    }
-
-    .main {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section {
-      margin-bottom: 50px;
-    }
-
-    .map-container {
-      width: 100%;
-      height: 400px;
-      margin-top: 20px;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .cta-buttons a {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px 20px;
-      background: #c38b6b;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .review-card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-      padding: 20px;
-      margin: 0 auto 30px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-
-    .review-author {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .review-date {
-      color: gray;
-      font-size: 0.9rem;
-    }
-
-    .review-content {
-      margin-top: 15px;
-    }
-
-    .filter-buttons button {
-      padding: 8px 20px;
-      margin: 5px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-      background: white;
-      cursor: pointer;
-    }
-
-    .filter-buttons button.active {
-      background: hotpink;
-      color: white;
-      border: none;
-    }
-  </style>
+    <style>
+        @font-face {
+            font-family: 'WandocleanseaB';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandocleanseaB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'WandocleanseaB', sans-serif;
+        }
+    </style>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../scss/styles.css">
@@ -118,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="about.html" data-bs-toggle="dropdown">클리닉소개</a>
+                        <a class="nav-link dropdown-toggle" href="about.html">클리닉소개</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="medical-staff.html">의료진 소개</a></li>
                             <li><a class="dropdown-item" href="clinic-blog.html">클리닉 블로그</a></li>
@@ -126,21 +49,21 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="umbilicoplasty.html" data-bs-toggle="dropdown">배꼽성형</a>
+                        <a class="nav-link dropdown-toggle" href="umbilicoplasty.html">배꼽성형</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="case-umbilicoplasty.html">케이스 배꼽성형</a></li>
                             <li><a class="dropdown-item" href="faq-umbilicoplasty.html">궁금해요! 배꼽성형</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="eyelid-surgery.html" data-bs-toggle="dropdown">눈성형</a>
+                        <a class="nav-link dropdown-toggle" href="eyelid-surgery.html">눈성형</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="case-eyelid-surgery.html">케이스 기능성 눈성형</a></li>
                             <li><a class="dropdown-item" href="faq-eyelid-surgery.html">궁금해요! 눈성형</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="rhinoplasty.html" data-bs-toggle="dropdown">코성형</a>
+                        <a class="nav-link dropdown-toggle" href="rhinoplasty.html">코성형</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="rhinoplasty-design.html">케이스 코성형 디자인</a></li>
                             <li><a class="dropdown-item" href="rhinoplasty-procedure.html">케이스 시술 안내</a></li>
@@ -148,7 +71,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="anti-aging.html" data-bs-toggle="dropdown">동안시술</a>
+                        <a class="nav-link dropdown-toggle" href="anti-aging.html">동안시술</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="face-lift.html">케이스 안면거상</a></li>
                             <li><a class="dropdown-item" href="botox.html">보톡스</a></li>
@@ -185,11 +108,8 @@
     <!-- Main Content -->
     <main id="page-content" class="container my-5">
         <!-- 페이지별 고유 콘텐츠가 여기에 들어갑니다 -->
-         
+     
 
-
-
-        
     </main>
 
     <!-- Footer -->
@@ -198,24 +118,24 @@
             <div class="row">
                 <div class="col-md-4">
                     <h5>케이스 성형외과</h5>
-                    <p>서울특별시 강남구 논현로 848 8층<br>
-                    사업자등록번호: 123-45-67890</p>
+                    <p>서울특별시 강남구 언주로 172길 11 모모빌딩4층<br>
+                    사업자등록번호: 211-09-48290</p>
                 </div>
                 <div class="col-md-4">
                     <h5>진료시간</h5>
                     <p>평일 10:00 - 19:00<br>
                     토요일 10:00 - 17:00<br>
-                    일요일 및 공휴일 휴진</p>
+                    일요일 및 공휴일 사전예약 시 진료수술가능</p>
                 </div>
                 <div class="col-md-4">
                     <h5>연락처</h5>
-                    <p>전화: 02-1234-5678<br>
+                    <p>고객센터: 02-541-7533<br>
                     이메일: info@case-clinic.com</p>
                 </div>
             </div>
             <hr>
             <div class="text-center">
-                <p class="mb-0">&copy; 2024 케이스 성형외과. All rights reserved.</p>
+                <p class="mb-0">&copy; 2025 케이스 성형외과. All rights reserved.</p>
             </div>
         </div>
     </footer>
